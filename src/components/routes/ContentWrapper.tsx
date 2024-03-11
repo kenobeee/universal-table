@@ -16,7 +16,7 @@ const Wrapper = styled.main`
 export const ContentWrapper = () => (
     <Wrapper>
         <Routes>
-            <Route path='/' element={<Navigate to={`/preview/${TableType.pages}`} />} />
+            <Route path='/' element={<Navigate to={`/preview/${TableType.products}`} />} />
             <Route path='/preview/:tableType' element={<Preview />} />
         </Routes>
     </Wrapper>

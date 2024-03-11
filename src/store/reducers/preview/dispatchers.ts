@@ -4,6 +4,7 @@ import async from './async';
 
 export const {
     setPreviewData,
+    updateItem
 } = bindActions(actions);
 
 export const {

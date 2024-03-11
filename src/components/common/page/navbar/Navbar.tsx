@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import styled from 'styled-components';
 import {NavLink} from 'react-router-dom';
 
@@ -31,15 +31,17 @@ const StyledLink = styled(NavLink)`
   font-size: 24px;
   text-transform: uppercase;
   
+  &.active {
+    color: orangered !important;
+  }
+  
   &:first-child {
     margin-left: 0;
   }
 `;
 
 export const Navbar = () => {
-    const links = Object.keys(TableType);
-
-    console.log(links);
+    const links = useMemo(() => Object.keys(TableType), []);
 
     return (
         <Wrapper>

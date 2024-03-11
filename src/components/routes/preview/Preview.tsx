@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+
+import {ModalWrapper, Table} from '@components/common';
+import {ItemEdit} from './modals';
+
 import {usePreviewData} from '@lib/hooks/usePreviewData';
-import {Table} from '@components/common';
 
 const Wrapper = styled.section`
   display: flex;
@@ -20,13 +23,29 @@ const Border = styled.div`
 `;
 
 export const Preview = () => {
-    const preview = usePreviewData();
+    const {data, mutatedFields, setMutatedFields, startUpdateField, finishUpdateField} = usePreviewData();
 
     return (
-        <Wrapper>
-            <Border>
-                {preview ? <Table {...preview}/> : <>loader</>}
-            </Border>
-        </Wrapper>
+        <>
+            <Wrapper>
+                <Border>
+                    {data
+                        ? <Table {...data} startUpdateField={startUpdateField}/>
+                        : <>loader</>}
+                </Border>
+            </Wrapper>
+            <ModalWrapper
+                isOpened={!!mutatedFields}
+                onClose={() => setMutatedFields(null)}>
+                <ItemEdit
+                    mutatedFields={mutatedFields}
+                    finishUpdateField={finishUpdateField}
+                    inputHandler={(value) => {
+                        if (mutatedFields) {
+                            setMutatedFields({...mutatedFields, value});
+                        }
+                    }}/>
+            </ModalWrapper>
+        </>
     );
 };

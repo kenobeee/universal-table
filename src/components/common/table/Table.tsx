@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {PreviewData} from '@lib/hooks/usePreviewData';
 
 const Header = styled.div`
   border-radius: 1em 1em 0 0;
@@ -67,13 +68,29 @@ const BodyCellText = styled.span`
   font-weight: 500;
 `;
 
+const EditBtn = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 6px 10px;
+
+  background-color: #d7d7d7;
+  border-radius: 4px;
+
+  color: #fff;
+
+  cursor: pointer;
+`;
+
 type TableP = {
   keys:string[],
-  rows:(string | null | boolean)[][]
+  rows:(string | null | boolean)[][],
+  startUpdateField:PreviewData['startUpdateField']
 };
 
 export const Table = (props:TableP) => {
-    const {keys, rows} = props;
+    const {keys, rows, startUpdateField} = props;
 
     return (
         <>
@@ -92,11 +109,16 @@ export const Table = (props:TableP) => {
                     <Row key={i}>
                         {row.map((cell, j) => {
                             const isStatusType = typeof cell === 'boolean';
+                            const isEditBtn = j === row.length - 1;
 
                             return <BodyCell key={j}>
                                 {isStatusType
                                     ? <StatusCircle isActive={cell as boolean}/>
-                                    : <BodyCellText>{cell}</BodyCellText>}
+                                    : <BodyCellText>
+                                        {isEditBtn
+                                            ? <EditBtn onClick={() => startUpdateField(i)}>{cell}</EditBtn>
+                                            : cell}
+                                    </BodyCellText>}
                             </BodyCell>;
                         })}
                     </Row>

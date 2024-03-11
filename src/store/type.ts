@@ -9,30 +9,36 @@ export enum TableType {
 }
 
 interface ICommonPreview {
-    id:number
-    active:boolean
-}
-
-export interface IProductPreview extends ICommonPreview {
-    description:string
-    createdAt:string
-    removedAt:string
-}
-
-export interface IPricePlanPreview extends ICommonPreview {
-    title:string
-    updatedAt:string
-    publishedAt:string
+    readonly id:number
+    readonly active:boolean
 }
 
 export interface IPagePreview extends ICommonPreview {
+    title:string
+    readonly updatedAt:string
+    readonly publishedAt:string
+}
+
+export interface IPricePlanPreview extends ICommonPreview {
+    description:string
+    readonly createdAt:string
+    readonly removedAt:string
+}
+
+export interface IProductPreview extends ICommonPreview {
     name:string
-    options:{
+    readonly options:{
         size:string
         amount:number
     };
-    createdAt:string
+    readonly createdAt:string
 }
+
+export const WritableFieldsMap:{[K in keyof typeof TableType]:keyof IPagePreview | keyof IPricePlanPreview | keyof IProductPreview} = {
+    [TableType.products]: 'name',
+    [TableType.pages]: 'title',
+    [TableType.pricePlans]: 'description',
+};
 
 export type TablePreviewMap = {
     [TableType.products]:IProductPreview[]
@@ -44,7 +50,12 @@ export type PreviewInitialState = {
     [K in keyof typeof TableType]:TablePreviewMap[typeof TableType[K]];
 };
 
+// export type FilterReadonly<T> = {
+//     [K in keyof T]-?:T[K] extends Readonly<any> ? never : K;
+// };
+
 export type SetPreviewDataPA = PA<Partial<PreviewInitialState>>;
+export type UpdateItemPA = PA<{type:TableType, id:number, fieldName:string, value:string}>;
 
 // store
 
