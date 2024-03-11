@@ -1,7 +1,3 @@
-# Starter Client-Side Web Application Development Pattern
-
-This starter pattern provides a foundation for developing client-side web applications using React, TypeScript, Redux Toolkit, and Styled Components. It includes a basic setup with Webpack.
-
 ## The process of adding new mock data
 
 1. Creating a new JSON file and naming it according to the camelCase rule (path: 'mock/*');
