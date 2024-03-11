@@ -6,9 +6,9 @@ const {TsconfigPathsPlugin} = require('tsconfig-paths-webpack-plugin');
 
 const customPlugins = [
     new HtmlWebpackPlugin({
-        title: 'siter',
         template: path.resolve(__dirname, './src/template.html'),
         filename: 'index.html',
+        publicPath: '/'
     }),
     new CleanWebpackPlugin(),
     new ESLintPlugin({
