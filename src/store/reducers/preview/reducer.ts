@@ -6,7 +6,8 @@ import {PreviewInitialState} from '../../type';
 export const initialState:PreviewInitialState = {
     pages: [],
     products: [],
-    pricePlans: []
+    pricePlans: [],
+    new: []
 };
 
 export const {actions, reducer} = createSlice({

@@ -109,7 +109,7 @@ export const Table = (props:TableP) => {
                     <Row key={i}>
                         {row.map((cell, j) => {
                             const isStatusType = typeof cell === 'boolean';
-                            const isEditBtn = j === row.length - 1;
+                            const isEditBtn = j === row.length - 1 && cell === 'edit';
 
                             return <BodyCell key={j}>
                                 {isStatusType

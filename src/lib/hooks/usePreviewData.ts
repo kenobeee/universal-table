@@ -52,21 +52,25 @@ export const usePreviewData = ():PreviewData => {
                     return value;
                 });
 
-                // added edit col
-                updatedRow.push('edit');
+                if (neededMutableField) {
+                    // added edit col
+                    updatedRow.push('edit');
+                }
 
                 return updatedRow;
             }
             );
 
-            // added edit col
-            keys.push('');
+            if (neededMutableField) {
+                // added edit col
+                keys.push('');
+            }
 
             setData({keys, rows});
         } else {
             getPreviewData(tableType);
         }
-    }, [tableData, tableType]);
+    }, [tableData, tableType, neededMutableField]);
 
     // foos
 
@@ -83,7 +87,7 @@ export const usePreviewData = ():PreviewData => {
     }, [tableData, neededMutableField]);
 
     const finishUpdateField = useCallback(() => {
-        if (mutatedFields && tableType) {
+        if (mutatedFields && tableType && neededMutableField) {
             updateItem({
                 id: mutatedFields.id,
                 value: mutatedFields.value,
