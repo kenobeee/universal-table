@@ -6,18 +6,31 @@ import {PreviewData} from '@lib/hooks/usePreviewData';
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   
   padding: 20px;
 `;
 
-const Submit = styled.button`
-  width: 120px;
-  height: 60px;
-`;
-
 const Input = styled.input`
+  padding: 0 10px;
+  
   width: 100%;
   height: 60px;
+
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+`;
+
+const Submit = styled.button`
+  margin-top: 20px;
+  
+  width: 120px;
+  height: 60px;
+
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  
+  cursor: pointer;
 `;
 
 type ItemEditP = {

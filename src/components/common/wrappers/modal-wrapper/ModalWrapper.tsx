@@ -26,11 +26,9 @@ const Outer = styled.div<{isOpened:boolean}>`
 `;
 
 const Inner = styled.div`
-  width: 600px;
-  height: 400px;
+  width: 400px;
 
   background-color: #fff;
-  
   border-radius: 12px;
 
   cursor: auto;
