@@ -3,16 +3,11 @@ import {Provider} from 'react-redux';
 import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 
 import BaseStyles from './Base.styled';
-
 import {Table} from '@components/routes';
 
 import {store} from '@store/index';
 
-export enum TableType {
-    products = 'products',
-    pricePlans = 'pricePlans',
-    pages = 'pages'
-}
+import {TableType} from '@store/type';
 
 export const App = () => (
     <>

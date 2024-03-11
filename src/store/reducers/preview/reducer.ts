@@ -1,14 +1,16 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 import * as reducers from './reducers';
-import {IExampleInitialState} from '../../type';
+import {PreviewInitialState} from '../../type';
 
-export const initialState:IExampleInitialState = {
-    someField: null
+export const initialState:PreviewInitialState = {
+    pages: [],
+    products: [],
+    pricePlans: []
 };
 
 export const {actions, reducer} = createSlice({
-    name: 'authNew',
+    name: 'preview',
     initialState,
     reducers,
 });

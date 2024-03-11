@@ -1,8 +1,10 @@
-import React, {useMemo} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import styled from 'styled-components';
 import {useParams} from 'react-router-dom';
-import {getTableData} from '@lib/api';
-import {TableType} from '@components/app/App';
+import {TableType} from '@store/type';
+import {getPreviewData} from '@store/reducers/preview/async';
+import {useDispatch, useSelector} from 'react-redux';
+import {previewSelector} from '@store/reducers/preview/selectors';
 
 const Wrapper = styled.section`
   display: flex;
@@ -102,14 +104,27 @@ function isDateString(str:string):boolean {
 
 export const Table = () => {
     const {tableType} = useParams();
+    const data = useSelector(previewSelector);
+    const dispatcher = useDispatch();
 
     const [keys, rows] = useMemo(() => {
-        const data = getTableData(tableType as TableType);
+        if (data[tableType as TableType].length > 0) {
+            const kk = data[tableType as TableType];
 
-        const keys = Object.keys(data[0]);
-        const rows = data.map((row) => Object.values(row));
+            const keys = Object.keys(kk[0]);
+            const rows = kk.map((row) => Object.values(row));
 
-        return [keys, rows];
+            return [keys, rows];
+        }
+
+        return [[], []];
+    }, [data]);
+
+    useEffect(() => {
+        if (tableType) {
+            // @ts-ignore
+            dispatcher(getPreviewData(tableType as TableType));
+        }
     }, [tableType]);
 
     return (
