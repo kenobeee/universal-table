@@ -1,9 +1,8 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-
-import {IProductPreview, IPagePreview, IPricePlanPreview, TableType} from '../../type';
 import {setPreviewData} from '@store/reducers/preview/dispatchers';
+import {IProductPreview, IPagePreview, IPricePlanPreview, TableType} from '../../type';
 
-export const getPreviewData = createAsyncThunk(
+const getPreviewData = createAsyncThunk(
     'tableData',
     async (tableType:TableType) => {
         try {
@@ -16,3 +15,7 @@ export const getPreviewData = createAsyncThunk(
         }
     }
 );
+
+export default {
+    getPreviewData
+};

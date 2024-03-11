@@ -14,33 +14,32 @@ interface ICommonPreview {
 }
 
 export interface IProductPreview extends ICommonPreview {
-    description:string;
-    createdAt:string;
-    removedAt:string;
+    description:string
+    createdAt:string
+    removedAt:string
 }
 
 export interface IPricePlanPreview extends ICommonPreview {
-    title:string;
-    updatedAt:string;
-    publishedAt:string;
+    title:string
+    updatedAt:string
+    publishedAt:string
 }
 
 export interface IPagePreview extends ICommonPreview {
-    name:string;
+    name:string
     options:{
-        size:string;
-        amount:number;
+        size:string
+        amount:number
     };
-    createdAt:string;
+    createdAt:string
 }
 
 export type TablePreviewMap = {
-    [TableType.products]:IProductPreview[];
-    [TableType.pricePlans]:IPricePlanPreview[];
-    [TableType.pages]:IPagePreview[];
+    [TableType.products]:IProductPreview[]
+    [TableType.pricePlans]:IPricePlanPreview[]
+    [TableType.pages]:IPagePreview[]
 };
 
-// Создаем тип PreviewInitialState с помощью TablePreviewMap
 export type PreviewInitialState = {
     [K in keyof typeof TableType]:TablePreviewMap[typeof TableType[K]];
 };
