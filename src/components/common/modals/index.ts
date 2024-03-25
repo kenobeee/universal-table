@@ -1,1 +1,1 @@
-// export {ItemEdit} from './ItemEdit';
+export {TableCellEditModal} from './TableCellEditModal';

@@ -9,11 +9,10 @@ type ITableP = {
 };
 
 const Header = styled.div`
-  border-radius: 1em 1em 0 0;
-
   width: 100%;
 
   background-color: rgba(246, 246, 246, 0.7);
+  border-radius: 1em 1em 0 0;
 `;
 
 const Body = styled.div`
@@ -21,9 +20,12 @@ const Body = styled.div`
 `;
 
 export const Row = styled.div`
+  position: relative;
+  
   display: flex;
   align-items: center;
 
+  padding-right: 60px;
   border-bottom: 1px solid rgba(171, 171, 171, 0.4);
 
   width: 100%;

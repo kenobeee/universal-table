@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import React from 'react';
+
 import {CellStyled} from '../../Table';
+
+import {formatDate, isDateString} from '@lib/utils';
 
 const BodyCell = styled(CellStyled)`
   padding: 1rem;
@@ -21,7 +24,12 @@ const BodyCellText = styled.span`
   font-weight: 500;
 `;
 
-const EditBtn = styled.span`
+export const EditBtn = styled.span`
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(-100%, -50%);
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,8 +54,19 @@ export const Cell = (props:CellP) => {
     const render = () => {
         switch (typeof value) {
             case 'boolean': return <StatusCircle isActive={value}/>;
-            case 'object': return value ? JSON.stringify(value) : '';
-            default: return <BodyCellText>{value}</BodyCellText>;
+            case 'object':
+                return Object.entries(value)
+                    .map(([key, value]) => `${key}: ${value}`)
+                    .join(', ');
+            default: {
+                let presentableValue = value;
+
+                const isDateType = isDateString(value as string);
+
+                if (isDateType) presentableValue = formatDate(value);
+                
+                return <BodyCellText>{presentableValue}</BodyCellText>;
+            }
         }
     };
 
