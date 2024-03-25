@@ -9,17 +9,17 @@
       "@components/*": [
         "components/*"
       ],
-      "@lib/": [
+      "@lib": [
         "lib"
       ],
       "@lib/*": [
         "lib/*"
       ],
-      "@types/": [
-        "types"
+      "@custom-types": [
+        "custom-types"
       ],
-      "@types/*": [
-        "types/*"
+      "@custom-types/*": [
+        "custom-types/*"
       ]
     },
     "allowJs": true,

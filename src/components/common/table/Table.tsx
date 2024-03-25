@@ -1,7 +1,7 @@
 import React, {ReactNode} from 'react';
 import styled from 'styled-components';
 
-import {CommonTableData} from 'types';
+import {CommonTableData} from '@custom-types';
 
 type ITableP = {
     data:CommonTableData,

@@ -1,8 +1,8 @@
-import React, {useMemo} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import {NavLink} from 'react-router-dom';
 
-import {TableType} from 'types';
+import {TableType} from '@custom-types';
 
 const Wrapper = styled.nav`
   display: flex;
@@ -40,15 +40,11 @@ const StyledLink = styled(NavLink)`
   }
 `;
 
-export const Navbar = () => {
-    const links = useMemo(() => Object.keys(TableType), []);
-
-    return (
-        <Wrapper>
-            <Container>
-                {links.map((value, i) =>
-                    <StyledLink key={i} to={`preview/${value}`}>{value}</StyledLink>)}
-            </Container>
-        </Wrapper>
-    );
-};
+export const Navbar = () => (
+    <Wrapper>
+        <Container>
+            {Object.keys(TableType).map((key, i) => (
+                <StyledLink key={i} to={`${key}`}>{key}</StyledLink>))}
+        </Container>
+    </Wrapper>
+);

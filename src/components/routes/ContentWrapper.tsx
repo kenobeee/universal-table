@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {Route, Routes} from 'react-router-dom';
 
-import {Pages} from './pages';
+import {TablePages} from './pages';
 
 const Wrapper = styled.main`
   width: 100%;
@@ -14,7 +14,9 @@ const Wrapper = styled.main`
 export const ContentWrapper = () => (
     <Wrapper>
         <Routes>
-            <Route path={'/pages'} element={<Pages/>}/>
+            {Object.entries(TablePages).map(([type, Component]) => (
+                <Route key={type} path={`/${type}`} element={<Component />} />
+            ))}
         </Routes>
     </Wrapper>
 );

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Table, Row, Cell} from '@components/common/table';
 
-import {IPageTable} from 'types';
+import {IPageTable} from '@custom-types';
 
 export const Pages = () => {
     const [table, setTable] = useState<null | IPageTable[]>();
