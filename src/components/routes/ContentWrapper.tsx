@@ -1,11 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Navigate, Route, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 
-import {Preview} from '@components/routes/preview';
 import {Pages} from './pages';
-
-import {TableType} from '@store/type';
 
 const Wrapper = styled.main`
   width: 100%;
@@ -17,8 +14,6 @@ const Wrapper = styled.main`
 export const ContentWrapper = () => (
     <Wrapper>
         <Routes>
-            <Route path='/' element={<Navigate to={`/preview/${TableType.products}`} />} />
-            <Route path='/preview/:tableType' element={<Preview />} />
             <Route path={'/pages'} element={<Pages/>}/>
         </Routes>
     </Wrapper>

@@ -1,33 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {Table, Row, Cell} from '@components/common/table-new';
+import {Table, Row, Cell} from '@components/common/table';
 
-interface ICommonTable {
-    id:number,
-    active:boolean
-}
-
-interface IPageTable extends ICommonTable {
-    title:string
-    updatedAt:Date,
-    publishedAt:Date
-}
-
-interface IPricePlansTable extends ICommonTable {
-    description:string,
-    createdAt:Date,
-    removedAt:Date
-}
-
-interface IProductsTable extends ICommonTable {
-    name:string,
-    options:{
-        size:string,
-        amount:number
-    },
-    createdAt:Date,
-}
-
-export type CommonTableData<T = IPageTable & IPricePlansTable & IProductsTable> = Partial<T>[];
+import {IPageTable} from 'types';
 
 export const Pages = () => {
     const [table, setTable] = useState<null | IPageTable[]>();

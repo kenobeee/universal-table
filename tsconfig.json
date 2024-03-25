@@ -15,17 +15,11 @@
       "@lib/*": [
         "lib/*"
       ],
-      "@store/": [
-        "store"
+      "@types/": [
+        "types"
       ],
-      "@store/*": [
-        "store/*"
-      ],
-      "@config/": [
-        "config"
-      ],
-      "@config/*": [
-        "config/*"
+      "@types/*": [
+        "types/*"
       ]
     },
     "allowJs": true,

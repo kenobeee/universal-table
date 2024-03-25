@@ -2,7 +2,7 @@ import React, {useMemo} from 'react';
 import styled from 'styled-components';
 import {NavLink} from 'react-router-dom';
 
-import {TableType} from '@store/type';
+import {TableType} from 'types';
 
 const Wrapper = styled.nav`
   display: flex;
