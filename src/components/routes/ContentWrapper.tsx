@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {Navigate, Route, Routes} from 'react-router-dom';
 
 import {Preview} from '@components/routes/preview';
+import {Pages} from './pages';
 
 import {TableType} from '@store/type';
 
@@ -18,6 +19,7 @@ export const ContentWrapper = () => (
         <Routes>
             <Route path='/' element={<Navigate to={`/preview/${TableType.products}`} />} />
             <Route path='/preview/:tableType' element={<Preview />} />
+            <Route path={'/pages'} element={<Pages/>}/>
         </Routes>
     </Wrapper>
 );
