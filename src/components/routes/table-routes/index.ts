@@ -1,6 +1,8 @@
 import React from 'react';
 
-import {Pages} from './Pages';
+import {Pages} from './pages';
+import {Products} from './products';
+import {PricePlans} from './price-plans';
 
 import {TableType} from '@custom-types';
 
@@ -10,7 +12,6 @@ type TableComponentMap = {
 
 export const TablePages:TableComponentMap = {
     [TableType.pages]: Pages,
-    // todo
-    [TableType.pricePlans]: Pages,
-    [TableType.products]: Pages
+    [TableType.pricePlans]: PricePlans,
+    [TableType.products]: Products
 };

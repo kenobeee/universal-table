@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {Route, Routes} from 'react-router-dom';
 
-import {TablePages} from './pages';
+import {TablePages} from './table-routes';
 
 const Wrapper = styled.main`
   width: 100%;
