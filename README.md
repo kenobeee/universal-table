@@ -1,9 +1,3 @@
-## The process of adding new mock data
-
-1. Creating a new JSON file and naming it according to the camelCase rule (path: 'mock/*');
-2. Adding a new key-value pair with the same name to the enum TableType (the key name should match the file name) (path: 'src/store/type.ts')
-3. Following the breadcrumb trail in TypeScript
-
 ## Technologies Used
 
 - **React**: A JavaScript library for building user interfaces.
