@@ -10,6 +10,7 @@ type TableComponentMap = {
     [key in TableType]:() => React.JSX.Element
 };
 
+// @ts-ignore
 export const TablePages:TableComponentMap = {
     [TableType.pages]: Pages,
     [TableType.pricePlans]: PricePlans,

@@ -1,9 +1,9 @@
 import React, {useCallback, useEffect, useState} from 'react';
 
+import {Table} from '@components/common/table';
 import {ModalWrapper, TableCellEditModal} from '@components/common';
-import {Table, Row, Cell, EditBtn} from '@components/common/table';
 
-import {IPageTable} from '@custom-types';
+import {IPageTable, TableType} from '@custom-types';
 
 export const Pages = () => {
     const [table, setTable] = useState<IPageTable[] | null>(null);
@@ -32,23 +32,19 @@ export const Pages = () => {
 
     return (
         <>
-            {!!table && <Table data={table}>
-                {table.map((row) =>
-                    <Row key={row.id}>
-                        {Object.values(row).map((cell, i) =>
-                            <Cell key={i} value={cell}/>)}
-                        <EditBtn onClick={() => setUpdatingRow(row)}>
-                            Edit</EditBtn>
-                    </Row>)}</Table>}
-            {!!updatingRow && <ModalWrapper
+            {table && <Table
+                data={table}
+                type={TableType.pages}
+                // @ts-ignore
+                updatingHandler={setUpdatingRow}/>}
+            {updatingRow && <ModalWrapper
                 isOpened={true}
                 onClose={updateTitle}>
                 <TableCellEditModal
                     value={updatingRow.title}
                     onUpdate={(value) =>
                         setUpdatingRow({...updatingRow, title: value})}
-                    onSave={updateTitle}/>
-            </ModalWrapper>}
+                    onSave={updateTitle}/></ModalWrapper>}
         </>
     );
 };

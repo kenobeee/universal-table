@@ -44,7 +44,10 @@ export const TableCellEditModal = (props:ItemEditP) => {
         <Wrapper>
             <Input
                 value={value}
-                onChange={(e:ChangeEvent<HTMLInputElement>) => onUpdate(e.currentTarget.value)}/>
+                onChange={(e:ChangeEvent<HTMLInputElement>) =>
+                    onUpdate(e.currentTarget.value)}
+                onKeyDown={(e:React.KeyboardEvent<HTMLInputElement>) =>
+                    e.key === 'Enter' && onSave()}/>
             <Submit onClick={onSave}>Save</Submit>
         </Wrapper>
     );

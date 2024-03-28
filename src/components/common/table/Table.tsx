@@ -1,12 +1,21 @@
-import React, {ReactNode} from 'react';
+import React, {useMemo} from 'react';
 import styled from 'styled-components';
 
-import {CommonTableData} from '@custom-types';
+import {CellViewResolver} from '@components/common/table/CellViewResolver';
+
+import {CommonTableData, TableType} from '@custom-types';
 
 type ITableP = {
-    data:CommonTableData,
-    children:ReactNode
+    data:CommonTableData[],
+    type:TableType,
+    updatingHandler:(row:CommonTableData) => void
 };
+
+const Wrapper = styled.section`
+  margin: 0 auto;
+  
+  width: 80%;
+`;
 
 const Header = styled.div`
   width: 100%;
@@ -35,12 +44,13 @@ export const Row = styled.div`
   }
 `;
 
-export const CellStyled = styled.div`
+export const CellStyled = styled.div<{width:number}>`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 1 1 0;
+  //flex: 1 1 0;
 
+  width: ${props => props.width + '%'};
   height: 100%;
   
   text-align: center;
@@ -57,24 +67,52 @@ const HeaderCellText = styled.span`
   text-transform: uppercase;
 `;
 
+const BodyCell = styled(CellStyled)`
+  padding: 1rem;
+`;
+
+export const EditBtn = styled.span`
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(-100%, -50%);
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 6px 10px;
+
+  background-color: #d7d7d7;
+  border-radius: 4px;
+
+  color: #fff;
+
+  cursor: pointer;
+`;
+
 export const Table = (props:ITableP) => {
-    const {data, children} = props;
+    const {data, type, updatingHandler} = props;
+
+    const resolver = useMemo(() => CellViewResolver[type], [type]);
     
     return (
-        <>
+        <Wrapper>
             <Header>
                 <Row>
-                    {Object.keys(data[0]).map((key, i) =>
-                        <HeaderCell key={i}>
-                            <HeaderCellText>
-                                {key}
-                            </HeaderCellText>
-                        </HeaderCell>)}
+                    {resolver.map(cell =>
+                        <HeaderCell key={cell.key} width={cell.width}>
+                            <HeaderCellText>{cell.key}</HeaderCellText></HeaderCell>)}
                 </Row>
             </Header>
             <Body>
-                {children}
+                {data.map(row =>
+                    <Row key={row.id}>
+                        {resolver.map(cell =>
+                            <BodyCell key={cell.key} width={cell.width}>{cell.render(row as any)}</BodyCell>)}
+                        <EditBtn onClick={() => updatingHandler(row)}>Edit</EditBtn>
+                    </Row>)}
             </Body>
-        </>
+        </Wrapper>
     );
 };

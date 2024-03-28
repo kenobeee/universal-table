@@ -1,9 +1,9 @@
 import React, {useCallback, useEffect, useState} from 'react';
 
+import {Table} from '@components/common/table';
 import {ModalWrapper, TableCellEditModal} from '@components/common';
-import {Table, Row, Cell, EditBtn} from '@components/common/table';
 
-import {IPricePlansTable} from '@custom-types';
+import {IPricePlansTable, TableType} from '@custom-types';
 
 export const PricePlans = () => {
     const [table, setTable] = useState<IPricePlansTable[] | null>(null);
@@ -32,23 +32,19 @@ export const PricePlans = () => {
 
     return (
         <>
-            {!!table && <Table data={table}>
-                {table.map((row) =>
-                    <Row key={row.id}>
-                        {Object.values(row).map((cell, i) =>
-                            <Cell key={i} value={cell}/>)}
-                        <EditBtn onClick={() => setUpdatingRow(row)}>
-                            Edit</EditBtn>
-                    </Row>)}</Table>}
-            {!!updatingRow && <ModalWrapper
+            {table && <Table
+                data={table}
+                type={TableType.pricePlans}
+                // @ts-ignore
+                updatingHandler={setUpdatingRow}/>}
+            {updatingRow && <ModalWrapper
                 isOpened={true}
                 onClose={updateDescription}>
                 <TableCellEditModal
                     value={updatingRow.description}
                     onUpdate={(value) =>
                         setUpdatingRow({...updatingRow, description: value})}
-                    onSave={updateDescription}/>
-            </ModalWrapper>}
+                    onSave={updateDescription}/></ModalWrapper>}
         </>
     );
 };

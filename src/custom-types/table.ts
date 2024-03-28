@@ -1,3 +1,5 @@
+import {ReactNode} from 'react';
+
 export enum TableType {
     products = 'products',
     pricePlans = 'pricePlans',
@@ -30,4 +32,18 @@ export interface IProductsTable extends ICommonTable {
     createdAt:Date,
 }
 
-export type CommonTableData<T = IPageTable & IPricePlansTable & IProductsTable> = Partial<T>[];
+export type CommonTableData = IPageTable | IPricePlansTable | IProductsTable;
+
+export type TableTypesDataMap<T extends TableType> =
+    T extends TableType.pricePlans ? IPricePlansTable :
+        T extends TableType.pages ? IPageTable :
+            T extends TableType.products ? IProductsTable :
+                never;
+
+export interface ICellRenderData<T extends TableType> {
+    key:keyof TableTypesDataMap<T>,
+    width:number, // in percents
+    render:(el:TableTypesDataMap<T>) => ReactNode,
+}
+
+export type CellViewResolverT = {[key in TableType]:ICellRenderData<key>[]};

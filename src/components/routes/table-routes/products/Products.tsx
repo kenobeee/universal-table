@@ -1,9 +1,9 @@
 import React, {useCallback, useEffect, useState} from 'react';
 
+import {Table} from '@components/common/table/Table';
 import {ModalWrapper, TableCellEditModal} from '@components/common';
-import {Table, Row, Cell, EditBtn} from '@components/common/table';
 
-import {IProductsTable} from '@custom-types';
+import {IProductsTable, TableType} from '@custom-types';
 
 export const Products = () => {
     const [table, setTable] = useState<IProductsTable[] | null>(null);
@@ -32,23 +32,19 @@ export const Products = () => {
 
     return (
         <>
-            {!!table && <Table data={table}>
-                {table.map((row) =>
-                    <Row key={row.id}>
-                        {Object.values(row).map((cell, i) =>
-                            <Cell key={i} value={cell}/>)}
-                        <EditBtn onClick={() => setUpdatingRow(row)}>
-                            Edit</EditBtn>
-                    </Row>)}</Table>}
-            {!!updatingRow && <ModalWrapper
+            {table && <Table
+                data={table}
+                type={TableType.products}
+                // @ts-ignore
+                updatingHandler={setUpdatingRow}/>}
+            {updatingRow && <ModalWrapper
                 isOpened={true}
                 onClose={updateName}>
                 <TableCellEditModal
                     value={updatingRow.name}
                     onUpdate={(value) =>
                         setUpdatingRow({...updatingRow, name: value})}
-                    onSave={updateName}/>
-            </ModalWrapper>}
+                    onSave={updateName}/></ModalWrapper>}
         </>
     );
 };
